@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "366780871616",
+    "firebase_url": "https://medifly-ce14e.firebaseio.com",
+    "project_id": "medifly-ce14e",
+    "storage_bucket": "medifly-ce14e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:366780871616:android:4916a63fbaf28eb0ec4e25",
+        "android_client_info": {
+          "package_name": "com.example.medifly"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "366780871616-oenqepol2ca0faf30bsojvaabcv7bff0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCPDAUw4GYEou0yhtdQtVnUdVkrBBZfQPk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "366780871616-oenqepol2ca0faf30bsojvaabcv7bff0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

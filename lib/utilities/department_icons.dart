@@ -1,0 +1,16 @@
+var departmentIcons = {
+  'Heart': 'cardiovascular.png',
+  'Eye': 'ophthalmology(1).png',
+  'Diabetes': 'diabetes.png',
+  'Nerves': 'neuron.png',
+  'Bone': 'joint.png',
+  'Kidney': 'kidney.png',
+  'Skin': 'skin.png',
+  'Women': 'female.png',
+  'Lungs': 'lungs.png',
+  'Pregnancy': 'pregnancy.png',
+  'Child': 'baby.png',
+  'Mentel': 'brain.png',
+  'Ear': 'ear.png',
+  'Stomach': 'stomach.png',
+};
