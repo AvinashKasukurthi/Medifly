@@ -1,4 +1,4 @@
-# medifly
+# Medifly
 
 A new Flutter project.
 
