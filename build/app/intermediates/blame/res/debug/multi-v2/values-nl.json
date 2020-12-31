@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "D:\\Projects\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-nl\\values-nl.xml",
+            "outputFile": "E:\\Projects\\Medifly\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-nl\\values-nl.xml",
             "map": [
                 {
                     "source": "C:\\Users\\avina\\.gradle\\caches\\transforms-2\\files-2.1\\4bf9447117eb643c1bf0a085edc432ab\\jetified-ucrop-2.2.6\\res\\values-nl\\values-nl.xml",

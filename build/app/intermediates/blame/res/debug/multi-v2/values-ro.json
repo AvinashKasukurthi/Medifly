@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "D:\\Projects\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-ro\\values-ro.xml",
+            "outputFile": "E:\\Projects\\Medifly\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-ro\\values-ro.xml",
             "map": [
                 {
                     "source": "C:\\Users\\avina\\.gradle\\caches\\transforms-2\\files-2.1\\b4af6bb2486b9c409bb555a5adff63fa\\appcompat-1.1.0\\res\\values-ro\\values-ro.xml",

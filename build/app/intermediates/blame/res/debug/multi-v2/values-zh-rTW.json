@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "D:\\Projects\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-zh-rTW\\values-zh-rTW.xml",
+            "outputFile": "E:\\Projects\\Medifly\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-zh-rTW\\values-zh-rTW.xml",
             "map": [
                 {
                     "source": "C:\\Users\\avina\\.gradle\\caches\\transforms-2\\files-2.1\\8046d7303c2565b32860883ab8f5785b\\jetified-play-services-basement-17.0.0\\res\\values-zh-rTW\\values.xml",
