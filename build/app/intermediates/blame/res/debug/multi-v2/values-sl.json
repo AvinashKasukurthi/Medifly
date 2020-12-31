@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "D:\\Flutter projects\\medifly\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-sl\\values-sl.xml",
+            "outputFile": "D:\\Projects\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-sl\\values-sl.xml",
             "map": [
                 {
                     "source": "C:\\Users\\avina\\.gradle\\caches\\transforms-2\\files-2.1\\8046d7303c2565b32860883ab8f5785b\\jetified-play-services-basement-17.0.0\\res\\values-sl\\values.xml",
