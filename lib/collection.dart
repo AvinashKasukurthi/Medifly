@@ -1,3 +1,0 @@
-class Collections {
-  int hello;
-}
