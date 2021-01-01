@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:medifly/profile_Screen.dart';
 import 'package:medifly/search_screen.dart';
 
 class SearchBar extends StatelessWidget {
@@ -33,8 +34,8 @@ class SearchBar extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
               child: Image.asset(
                 'images/Drawer.png',
-                width: 23,
-                height: 15,
+                width: 25,
+                height: 20,
               ),
             ),
           ),
@@ -51,7 +52,7 @@ class SearchBar extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 10.0),
                       child: IconButton(
-                        onPressed: (){},
+                        onPressed: () {},
                         icon: Icon(CupertinoIcons.search),
                       ),
                     ),
@@ -70,7 +71,9 @@ class SearchBar extends StatelessWidget {
                 Icons.person,
                 color: iconColor,
               ),
-              onPressed: () {}),
+              onPressed: () {
+                Navigator.pushNamed(context, ProfileScreen.id);
+              }),
         ],
       ),
     );
