@@ -1,8 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:medifly/search_screen.dart';
-import 'constants.dart';
 
 class SearchBar extends StatelessWidget {
   const SearchBar({
@@ -33,10 +31,10 @@ class SearchBar extends StatelessWidget {
             },
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: Icon(
-                Icons.short_text,
-                size: 35.0,
-                color: iconColor,
+              child: Image.asset(
+                'images/Drawer.png',
+                width: 23,
+                height: 15,
               ),
             ),
           ),
@@ -53,6 +51,7 @@ class SearchBar extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 10.0),
                       child: IconButton(
+                        onPressed: (){},
                         icon: Icon(CupertinoIcons.search),
                       ),
                     ),

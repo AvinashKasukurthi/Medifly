@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:medifly/PaymentConts.dart';
 import 'package:webview_flutter/webview_flutter.dart';
-import 'package:medifly/utilities/bookingscreen.dart';
 
 class PaymentScreen extends StatefulWidget {
   PaymentScreen({@required this.amount,this.orderid});

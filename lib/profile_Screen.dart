@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:medifly/main.dart';
-import 'package:medifly/utilities/auth_servises.dart';
 
 import 'package:medifly/utilities/constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -67,6 +66,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 }
 
+// ignore: must_be_immutable
 class ProfileDetails extends StatelessWidget {
   ProfileDetails({this.usertext, this.email, this.phonenumber});
   String nametext;

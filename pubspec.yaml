@@ -40,7 +40,7 @@ dependencies:
   provider: ^4.3.2+2
   shared_preferences: ^0.5.10
   font_awesome_flutter: ^8.8.1
-  upi_india: ^2.1.2
+  fluttertoast: ^7.1.6
 
 
 
@@ -81,6 +81,10 @@ flutter:
     - family: OpenSans
       fonts:
         - asset: fonts/OpenSans-Regular.ttf
+    - family: DrawerIcons
+      fonts:
+        - asset: lib/assets/fonts/DrawerIcons.ttf
+
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro

@@ -10,7 +10,7 @@ import 'package:medifly/utilities/hospitalcard.dart';
 import 'package:provider/provider.dart';
 import 'package:medifly/utilities/timeslots_data.dart';
 import 'package:medifly/utilities/time_info.dart';
-import 'package:medifly/utilities/upi_screen.dart';
+
 import 'package:medifly/tokenpage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
