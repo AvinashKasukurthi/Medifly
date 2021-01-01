@@ -144,7 +144,12 @@ class _AppComponentsState extends State<AppComponents> {
                     if (snapshot.hasData) {
                       final hospitalCardData = snapshot.data.docs;
                       List<HospitalCard> hospitalCards = [];
+                      int totalHospitalCardsOnHome = 0;
                       for (var card in hospitalCardData) {
+                        if (totalHospitalCardsOnHome > 4) {
+                          break;
+                        }
+
                         final cardName = card.data()['name'];
                         final cardImage = card.data()['image'];
                         final cardHospitalCost = card.data()['cost'];
@@ -179,6 +184,7 @@ class _AppComponentsState extends State<AppComponents> {
                           },
                         );
                         hospitalCards.add(hospitalCard);
+                        totalHospitalCardsOnHome++;
                       }
                       return hospitalCards.isNotEmpty
                           ? Container(
@@ -202,139 +208,6 @@ class _AppComponentsState extends State<AppComponents> {
           ),
           SizedBox(
             height: 15,
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
-            child: Column(
-              children: [
-                Container(
-                  decoration: BoxDecoration(
-                      color: kPrimaryColorBlue,
-                      borderRadius: BorderRadius.circular(20)),
-                  height: 160,
-                  child: Row(
-                    children: [
-                      Expanded(
-                          child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 15),
-                        child: Container(
-                            child: Text(
-                          '"Medicines cure diseases, but only doctors can cure patients"',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.w300,
-                            fontSize: 18,
-                          ),
-                        )),
-                      )),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 15),
-                        child: Container(
-                          height: 100,
-                          width: 100,
-                          child: Image.asset(
-                            'images/doctor.png',
-                            fit: BoxFit.fill,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Container(
-                  height: 200,
-                  child: Row(
-                    children: [
-                      Expanded(
-                        flex: 1,
-                        child: Container(
-                            decoration: BoxDecoration(
-                                color: kPrimaryColorBlue,
-                                borderRadius: BorderRadius.circular(20)),
-                            child: Column(
-                              children: [
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Icon(
-                                    Icons.sanitizer,
-                                    color: Colors.white,
-                                    size: 100,
-                                  ),
-                                ),
-                                Text(
-                                  'Keep',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w300,
-                                    fontSize: 20
-                                  ),
-                                ),
-                                 Text(
-                                  'Sanitized',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w300,
-                                    fontSize: 20
-                                  ),
-                                )
-                              ],
-                            )),
-                      ),
-                      SizedBox(
-                        width: 15,
-                      ),
-                      Expanded(
-                        flex: 1,
-                        child: Container(
-                          decoration: BoxDecoration(
-                              color: kPrimaryColorBlue,
-                              borderRadius: BorderRadius.circular(20)),
-                          child: Column(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Icon(
-                                  Icons.masks,
-                                  color: Colors.white,
-                                  size: 108,
-                                ),
-                              ),
-                              Text(
-                                'Wear',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w300,
-                                  fontSize: 20
-                                ),
-                              ), 
-                              Text(
-                                'Mask',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w300,
-                                  fontSize: 20
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
-                )
-              ],
-            ),
           ),
         ],
       ),
