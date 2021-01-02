@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:medifly/hospitalspage.dart';
 import 'package:medifly/main.dart';
 
 import 'package:medifly/utilities/bookingscreen.dart';
@@ -105,32 +107,51 @@ class _AppComponentsState extends State<AppComponents> {
     // listTest();
   }
 
+  String category = 'Popular Hospitals';
   @override
   Widget build(BuildContext context) {
     return Expanded(
       child: ListView(
         children: [
           AdvertaismentContent(),
-          SizedBox(height: 12.0),
-          SizedBox(
-            height: 10.0,
-          ),
+          SizedBox(height: 20.0),
           Padding(
-            padding: const EdgeInsets.only(left: 15),
-            child: Text(
-              'Popular Hospitals',
-              style: kMainText,
+            padding: const EdgeInsets.only(left: 20.0, right: 20.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Popular Hospitals',
+                  style: kMainText,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Here are the popular results',
+                      style: kSubText,
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => HospitalPage(
+                              category: this.category,
+                            ),
+                          ),
+                        );
+                        //TODO: Have to goto the new screen so that we can see 50 popular hospitals.
+                      },
+                      child: Text(
+                        "See More",
+                        style: TextStyle(color: kPrimaryColorBlue),
+                      ),
+                    ),
+                  ],
+                )
+              ],
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(left: 18),
-            child: Text(
-              'Here are the popular results',
-              style: kSubText,
-            ),
-          ),
-          SizedBox(
-            height: 10.0,
           ),
           Container(
             // height: 300,
@@ -163,6 +184,7 @@ class _AppComponentsState extends State<AppComponents> {
                           amount: cardHospitalCost,
                           departments: cardDepartments,
                           time: cardTime,
+                          textHeight: 18,
                           onPressed: () {
                             Provider.of<CategoryData>(context, listen: false)
                                 .userOut();
@@ -194,7 +216,7 @@ class _AppComponentsState extends State<AppComponents> {
                                 shrinkWrap: true,
                                 scrollDirection: Axis.horizontal,
                                 crossAxisCount: 1,
-                                childAspectRatio: 0.85,
+                                childAspectRatio: 0.9,
                                 children: hospitalCards,
                               ),
                             )
