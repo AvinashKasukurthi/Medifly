@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:medifly/home_screen.dart';
 import 'package:flutter/services.dart';
+import 'package:medifly/hospitalspage.dart';
 import 'package:medifly/utilities/auth_servises.dart';
 import 'package:medifly/utilities/categories_data.dart';
 import 'package:medifly/profile_Screen.dart';
@@ -63,7 +64,8 @@ class _MyAppState extends State<MyApp> {
             HomeScreen.id: (context) => HomeScreen(),
             ProfileScreen.id: (context) => ProfileScreen(),
             SearchScreen.id: (context) => SearchScreen(),
-            RecentCards.id: (context)=> RecentCards(),
+            RecentCards.id: (context) => RecentCards(),
+            HospitalPage.id: (context) => HospitalPage(),
           },
         ),
       ),
