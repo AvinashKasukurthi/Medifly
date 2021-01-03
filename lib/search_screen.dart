@@ -72,74 +72,71 @@ class _SearchScreenState extends State<SearchScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: SafeArea(
-        child: Column(
-          children: [
-            Container(
-              child: Padding(
-                padding: const EdgeInsets.all(15.0),
-                child: TextField(
-                  controller: searchController,
-                  autofocus: true,
-                  decoration: InputDecoration(
-                    prefixIcon: Icon(
-                      Icons.search,
-                      color: kPrimaryColorBlue,
-                    ),
-                    hintText: 'search',
-                    border: OutlineInputBorder(
-                        borderSide: BorderSide(color: kPrimaryColorBlue)),
+    return SafeArea(
+      child: Column(
+        children: [
+          Container(
+            child: Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: TextField(
+                controller: searchController,
+                autofocus: true,
+                decoration: InputDecoration(
+                  prefixIcon: Icon(
+                    Icons.search,
+                    color: kPrimaryColorBlue,
                   ),
+                  hintText: 'search',
+                  border: OutlineInputBorder(
+                      borderSide: BorderSide(color: kPrimaryColorBlue)),
                 ),
               ),
             ),
-            Container(
-              child: Expanded(
-                child: ListView.builder(
-                  itemCount: isSearching == true
-                      ? locationfilterd.length
-                      : locationlist.length,
-                  itemBuilder: (context, index) {
-                    return GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => LocationCardScreen(
-                                location: isSearching == true
-                                    ? locationfilterd[index]
-                                    : locationlist[index],
-                              ),
-                            ));
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 10, vertical: 2),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: kCardsColor,
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: ListTile(
-                            leading: Icon(
-                              Icons.location_on,
-                              color: kPrimaryColorBlue,
+          ),
+          Container(
+            child: Expanded(
+              child: ListView.builder(
+                itemCount: isSearching == true
+                    ? locationfilterd.length
+                    : locationlist.length,
+                itemBuilder: (context, index) {
+                  return GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => LocationCardScreen(
+                              location: isSearching == true
+                                  ? locationfilterd[index]
+                                  : locationlist[index],
                             ),
-                            title: Text(isSearching == true
-                                ? locationfilterd[index]
-                                : locationlist[index]),
+                          ));
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 2),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: kCardsColor,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: ListTile(
+                          leading: Icon(
+                            Icons.location_on,
+                            color: kPrimaryColorBlue,
                           ),
+                          title: Text(isSearching == true
+                              ? locationfilterd[index]
+                              : locationlist[index]),
                         ),
                       ),
-                    );
-                  },
-                ),
+                    ),
+                  );
+                },
               ),
-            )
-          ],
-        ),
+            ),
+          )
+        ],
       ),
     );
   }

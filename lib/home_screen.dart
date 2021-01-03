@@ -1,9 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:medifly/category_page.dart';
 import 'package:medifly/hospitalspage.dart';
 import 'package:medifly/main.dart';
+import 'package:medifly/profile_Screen.dart';
+import 'package:medifly/search_screen.dart';
+import 'package:medifly/tokenpage.dart';
 
 import 'package:medifly/utilities/bookingscreen.dart';
 import 'package:medifly/utilities/cards_data.dart';
@@ -12,9 +18,9 @@ import 'package:medifly/utilities/categories_data.dart';
 import 'package:medifly/utilities/hospitalcard.dart';
 import 'package:medifly/utilities/constants.dart';
 import 'package:medifly/utilities/drawer.dart';
+import 'package:medifly/utilities/recenttoken_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'utilities/appbar.dart';
 import 'package:medifly/utilities/time_info.dart';
 
 FirebaseFirestore hospitalRef = FirebaseFirestore.instance;
@@ -22,7 +28,15 @@ String drawername;
 
 class HomeScreen extends StatefulWidget {
   static String id = 'HomeScreen';
-
+  final GlobalKey<ScaffoldState> scaffoldKey = new GlobalKey<ScaffoldState>();
+  int _selectedIndex = 0;
+  List<Widget> pages = [
+    HomePage(),
+    SearchScreen(),
+    CategoryPage(),
+    RecentCards(),
+    ProfileScreen(),
+  ];
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
@@ -50,6 +64,13 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
+  void _onItemTapped(int index) {
+    setState(() {
+      widget._selectedIndex = index;
+      print(widget._selectedIndex);
+    });
+  }
+
   @override
   void initState() {
     // TODO: implement initState
@@ -57,30 +78,87 @@ class _HomeScreenState extends State<HomeScreen> {
     updateProfile();
   }
 
-  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: _scaffoldKey,
-      drawer: Drawerpop(
-        drawername: drawername,
+      key: widget.scaffoldKey,
+      bottomNavigationBar: BottomNavigationBar(
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home_outlined),
+            activeIcon: Icon(Icons.home),
+            backgroundColor: kPrimaryColorBlue,
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.search_outlined),
+            activeIcon: Icon(Icons.search),
+            label: 'Search',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.widgets_outlined),
+            activeIcon: Icon(Icons.widgets_rounded),
+            label: 'Categories',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.history_outlined),
+            activeIcon: Icon(Icons.history_rounded),
+            label: 'History',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.account_circle_outlined),
+            activeIcon: Icon(Icons.account_circle_rounded),
+            label: 'Account',
+          ),
+        ],
+        selectedItemColor: Colors.white,
+        unselectedItemColor: Colors.white70,
+        currentIndex: widget._selectedIndex,
+        elevation: 5,
+        onTap: _onItemTapped,
       ),
       backgroundColor: Colors.white,
-      body: SafeArea(
-        child: Container(
-          child: Column(
-            children: [
-              SearchBar(
-                scaffoldKey: _scaffoldKey,
-                color: kCardsColor,
-                iconColor: kPrimaryColorBlue,
+      body: widget.pages[widget._selectedIndex],
+    );
+  }
+}
+
+class HomePage extends StatelessWidget {
+  final GlobalKey<ScaffoldState> scaffoldKey = new GlobalKey<ScaffoldState>();
+
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      child: Container(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(bottom: 20, left: 30, top: 15),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Home",
+                    style: TextStyle(
+                      color: kPrimaryColorBlue,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 25,
+                    ),
+                  ),
+                  Text(
+                    "We are Here for You.",
+                    style: TextStyle(
+                      color: kPrimaryColorBlue,
+                    ),
+                  ),
+                ],
               ),
-              Container(
-                child: AppComponents(),
-              ),
-            ],
-          ),
+            ),
+            Container(
+              child: AppComponents(),
+            ),
+          ],
         ),
       ),
     );
@@ -287,7 +365,14 @@ class AdvertaismentContent extends StatelessWidget {
       height: 200,
       child: FlatButton(
         onPressed: () {
-          print('pressed');
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) =>
+                  HospitalPage(category: 'Here are some Hospitals'),
+            ),
+          );
+          //TODO: Have to goto the new screen so that we can see 50 popular hospitals.
         },
         child: Container(
           padding: EdgeInsets.all(15.0),
@@ -367,7 +452,11 @@ class AdvertaismentContent extends StatelessWidget {
                   spreadRadius: 1.0)
             ],
             borderRadius: BorderRadius.circular(24),
-            color: kPrimaryColorBlue,
+            gradient: LinearGradient(
+                begin: Alignment.topRight,
+                end: Alignment.bottomLeft,
+                colors: [kPrimaryColorBlue, Colors.blue, Colors.blue[500]],
+                stops: [0.3, 0.7, 0.8]),
           ),
         ),
       ),
