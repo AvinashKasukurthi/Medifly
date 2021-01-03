@@ -19,50 +19,53 @@ class _RecentCardsState extends State<RecentCards> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: kPrimaryColorBlue,
-      body: Column(
-        children: [
-          StreamBuilder<QuerySnapshot>(
-            stream:
-                FirebaseFirestore.instance.collection('token_data').snapshots(),
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                final tokenCardData = snapshot.data.docs;
-                List<CardRecent> tokenCards = [];
-                for (var card in tokenCardData) {
-                  if (phoneNo == card.data()['mobileNumber']) {
-                    
-                    final tokenCard = CardRecent(
-                      departmenttext: card.data()['department'],
-                      date: card.data()['date'],
-                      hospitalname: card.data()['hospitalName'],
-                      imagetext: departmentIcons[card.data()['department']],
-                      timetext: card.data()['time'],
-                    );
-                    tokenCards.add(tokenCard);
+      body: SafeArea(
+        child: Column(
+          children: [
+            StreamBuilder<QuerySnapshot>(
+              stream: FirebaseFirestore.instance
+                  .collection('token_data')
+                  .snapshots(),
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  final tokenCardData = snapshot.data.docs;
+                  List<CardRecent> tokenCards = [];
+                  for (var card in tokenCardData) {
+                    if (phoneNo == card.data()['mobileNumber']) {
+                      final tokenCard = CardRecent(
+                        departmenttext: card.data()['department'],
+                        date: card.data()['date'],
+                        hospitalname: card.data()['hospitalName'],
+                        imagetext: departmentIcons[card.data()['department']],
+                        timetext: card.data()['time'],
+                      );
+                      tokenCards.add(tokenCard);
+                    }
                   }
-                }
-                return tokenCards.isNotEmpty
-                    ? Expanded(
-                        child: Container(
-                          // height: 350,
-                          padding: EdgeInsets.only(left: 8.0),
-                          child: ListView.builder(
-                            reverse: true,
-                            itemCount: tokenCards.length,
-                            shrinkWrap: true,
-                            scrollDirection: Axis.vertical,
-                            itemBuilder: (context, index) => tokenCards[index],
-                            // childAspectRatio: 0.85,
-                            // children: tokenCards,
+                  return tokenCards.isNotEmpty
+                      ? Expanded(
+                          child: Container(
+                            // height: 350,
+                            padding: EdgeInsets.only(left: 8.0),
+                            child: ListView.builder(
+                              reverse: true,
+                              itemCount: tokenCards.length,
+                              shrinkWrap: true,
+                              scrollDirection: Axis.vertical,
+                              itemBuilder: (context, index) =>
+                                  tokenCards[index],
+                              // childAspectRatio: 0.85,
+                              // children: tokenCards,
+                            ),
                           ),
-                        ),
-                      )
-                    : Container();
-              }
-              return Container();
-            },
-          )
-        ],
+                        )
+                      : Container();
+                }
+                return Container();
+              },
+            )
+          ],
+        ),
       ),
     );
   }

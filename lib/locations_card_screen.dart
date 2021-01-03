@@ -28,9 +28,8 @@ class _LocationCardScreenState extends State<LocationCardScreen> {
             title: locationData.data()['name'],
             image: locationData.data()['image'],
             location: locationData.data()['location'],
-            
+            textHeight: 22,
             onPressed: () {
-
               Provider.of<CategoryData>(context, listen: false).userOut();
               Navigator.push(
                 context,
@@ -69,12 +68,12 @@ class _LocationCardScreenState extends State<LocationCardScreen> {
       body: Container(
         child: hospitalCards.isNotEmpty
             ? Container(
-                padding: EdgeInsets.only(left: 8.0),
+                padding: EdgeInsets.only(left: 8.0, right: 8.0),
                 child: GridView.count(
                   shrinkWrap: true,
                   scrollDirection: Axis.vertical,
-                  crossAxisCount: 2,
-                  childAspectRatio: 0.85,
+                  crossAxisCount: 1,
+                  childAspectRatio: 1.1,
                   children: hospitalCards,
                 ),
               )

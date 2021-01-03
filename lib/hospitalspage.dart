@@ -34,8 +34,11 @@ class HospitalPage extends StatelessWidget {
                       child: Center(
                         child: Text(
                           "$category.",
-                          style:
-                              TextStyle(color: Colors.white70, fontSize: 22.0),
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Colors.white70,
+                            fontSize: 22.0,
+                          ),
                         ),
                       ),
                     ),

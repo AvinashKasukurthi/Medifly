@@ -45,3 +45,11 @@ class CategoriesWidget extends StatelessWidget {
     );
   }
 }
+
+class CategoryPage extends StatelessWidget {
+  static String id = 'CategoryPage';
+  @override
+  Widget build(BuildContext context) {
+    return Container();
+  }
+}
