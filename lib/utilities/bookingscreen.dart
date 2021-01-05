@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:medifly/PaymentScreen.dart';
 import 'package:medifly/category_page.dart';
 import 'package:medifly/main.dart';
 import 'package:medifly/utilities/categories_data.dart';
@@ -10,7 +9,6 @@ import 'package:medifly/utilities/hospitalcard.dart';
 import 'package:provider/provider.dart';
 import 'package:medifly/utilities/timeslots_data.dart';
 import 'package:medifly/utilities/time_info.dart';
-
 import 'package:medifly/tokenpage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
