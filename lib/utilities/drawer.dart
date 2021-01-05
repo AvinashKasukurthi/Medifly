@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:medifly/profile_Screen.dart';
-import 'package:medifly/utilities/recenttoken_screen.dart';
+import 'file:///E:/Projects/Medifly/lib/recenttoken_screen.dart';
 import 'constants.dart';
 import 'package:medifly/profile_Screen.dart';
 

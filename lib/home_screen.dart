@@ -18,7 +18,7 @@ import 'package:medifly/utilities/categories_data.dart';
 import 'package:medifly/utilities/hospitalcard.dart';
 import 'package:medifly/utilities/constants.dart';
 import 'package:medifly/utilities/drawer.dart';
-import 'package:medifly/utilities/recenttoken_screen.dart';
+import 'file:///E:/Projects/Medifly/lib/recenttoken_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:medifly/utilities/time_info.dart';
