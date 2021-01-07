@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:medifly/utilities/bookingscreen.dart';
+import 'file:///E:/Projects/Medifly/lib/bookingscreen.dart';
 import 'package:medifly/utilities/categories_data.dart';
 import 'package:medifly/utilities/hospitalcard.dart';
 import 'package:provider/provider.dart';
