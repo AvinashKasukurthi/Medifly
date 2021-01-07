@@ -5,6 +5,7 @@ import 'package:flutter/widgets.dart';
 import 'package:medifly/utilities/bookingscreen.dart';
 import 'package:medifly/utilities/categories_data.dart';
 import 'package:medifly/utilities/hospitalcard.dart';
+import 'package:medifly/utilities/pageheader.dart';
 import 'package:medifly/utilities/time_info.dart';
 import 'package:provider/provider.dart';
 
@@ -20,31 +21,7 @@ class HospitalPage extends StatelessWidget {
         child: Container(
           child: Column(
             children: [
-              Container(
-                height: 100,
-                child: Stack(
-                  fit: StackFit.expand,
-                  children: [
-                    Image.asset(
-                      'images/background.jpg',
-                      fit: BoxFit.cover,
-                    ),
-                    Container(
-                      color: Colors.black45,
-                      child: Center(
-                        child: Text(
-                          "$category.",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: Colors.white70,
-                            fontSize: 22.0,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+              PageHeader(title: this.category),
               StreamBuilder<QuerySnapshot>(
                 stream: FirebaseFirestore.instance
                     .collection('hospital_data')

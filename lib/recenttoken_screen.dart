@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:medifly/main.dart';
 import 'package:medifly/utilities/constants.dart';
 import 'package:medifly/utilities/department_icons.dart';
+import 'package:medifly/utilities/pageheader.dart';
 
 FirebaseFirestore ref = FirebaseFirestore.instance;
 
@@ -20,45 +21,7 @@ class _RecentCardsState extends State<RecentCards> {
     return SafeArea(
       child: Column(
         children: [
-          Container(
-            height: 100,
-            child: Stack(
-              fit: StackFit.expand,
-              children: [
-                Image.asset(
-                  'images/background.jpg',
-                  fit: BoxFit.cover,
-                ),
-                Container(
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                        begin: Alignment.topRight,
-                        end: Alignment.bottomLeft,
-                        colors: [
-                          kPrimaryColorBlue.withOpacity(0.9),
-                          kPrimaryColorBlue.withOpacity(0.6),
-                          kPrimaryColorBlue.withOpacity(0.3),
-                        ],
-                        stops: [
-                          0.3,
-                          0.6,
-                          0.9,
-                        ]),
-                  ),
-                  child: Center(
-                    child: Text(
-                      "Resent Bookings.",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: Colors.white70,
-                        fontSize: 22.0,
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
+          PageHeader(title: "Resent Bookings.",),
           StreamBuilder<QuerySnapshot>(
             stream:
                 FirebaseFirestore.instance.collection('token_data').snapshots(),
@@ -101,6 +64,8 @@ class _RecentCardsState extends State<RecentCards> {
     );
   }
 }
+
+
 
 class CardRecent extends StatelessWidget {
   final String departmenttext;
