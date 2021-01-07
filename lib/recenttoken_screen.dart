@@ -19,53 +19,57 @@ class _RecentCardsState extends State<RecentCards> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Column(
-        children: [
-          PageHeader(title: "Resent Bookings.",),
-          StreamBuilder<QuerySnapshot>(
-            stream:
-                FirebaseFirestore.instance.collection('token_data').snapshots(),
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                final tokenCardData = snapshot.data.docs;
-                List<CardRecent> tokenCards = [];
-                for (var card in tokenCardData) {
-                  if (phoneNo == card.data()['mobileNumber']) {
-                    final tokenCard = CardRecent(
-                      departmenttext: card.data()['department'],
-                      date: card.data()['date'],
-                      hospitalname: card.data()['hospitalName'],
-                      imagetext: departmentIcons[card.data()['department']],
-                      timetext: card.data()['time'],
-                    );
-                    tokenCards.add(tokenCard);
+      child: Container(
+        color: Colors.white,
+        child: Column(
+          children: [
+            PageHeader(
+              title: "Resent Bookings.",
+            ),
+            StreamBuilder<QuerySnapshot>(
+              stream: FirebaseFirestore.instance
+                  .collection('token_data')
+                  .snapshots(),
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  final tokenCardData = snapshot.data.docs;
+                  List<CardRecent> tokenCards = [];
+                  for (var card in tokenCardData) {
+                    if (phoneNo == card.data()['mobileNumber']) {
+                      final tokenCard = CardRecent(
+                        departmenttext: card.data()['department'],
+                        date: card.data()['date'],
+                        hospitalname: card.data()['hospitalName'],
+                        imagetext: departmentIcons[card.data()['department']],
+                        timetext: card.data()['time'],
+                      );
+                      tokenCards.add(tokenCard);
+                    }
                   }
-                }
-                return tokenCards.isNotEmpty
-                    ? Expanded(
-                        child: Container(
-                          child: GridView.count(
-                            shrinkWrap: true,
-                            // reverse: true,
-                            scrollDirection: Axis.vertical,
-                            crossAxisCount: 1,
-                            childAspectRatio: 1.5,
-                            children: tokenCards,
+                  return tokenCards.isNotEmpty
+                      ? Expanded(
+                          child: Container(
+                            child: GridView.count(
+                              shrinkWrap: true,
+                              // reverse: true,
+                              scrollDirection: Axis.vertical,
+                              crossAxisCount: 1,
+                              childAspectRatio: 1.5,
+                              children: tokenCards,
+                            ),
                           ),
-                        ),
-                      )
-                    : Container();
-              }
-              return Container();
-            },
-          )
-        ],
+                        )
+                      : Container();
+                }
+                return Container();
+              },
+            )
+          ],
+        ),
       ),
     );
   }
 }
-
-
 
 class CardRecent extends StatelessWidget {
   final String departmenttext;

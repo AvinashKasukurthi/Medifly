@@ -1,7 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:medifly/utilities/bookingscreen.dart';
+import 'file:///E:/Projects/Medifly/lib/bookingscreen.dart';
 import 'package:medifly/utilities/constants.dart';
 
 class HospitalCard extends StatefulWidget {
@@ -39,7 +39,7 @@ class _HospitalCardState extends State<HospitalCard> {
           borderRadius: BorderRadius.all(Radius.circular(10)),
           child: Container(
             decoration: BoxDecoration(
-              color: Colors.blueGrey.shade50,
+              color: kCardsColor,
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,

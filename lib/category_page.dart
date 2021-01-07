@@ -56,6 +56,7 @@ class CategoryPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Container(
+        color: Colors.white,
         child: Column(
           children: [
             PageHeader(title: "Categories"),

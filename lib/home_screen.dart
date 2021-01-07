@@ -9,15 +9,11 @@ import 'package:medifly/hospitalspage.dart';
 import 'package:medifly/main.dart';
 import 'package:medifly/profile_Screen.dart';
 import 'package:medifly/search_screen.dart';
-import 'package:medifly/tokenpage.dart';
-
-import 'package:medifly/utilities/bookingscreen.dart';
+import 'file:///E:/Projects/Medifly/lib/bookingscreen.dart';
 import 'package:medifly/utilities/cards_data.dart';
 import 'package:medifly/utilities/categories_data.dart';
-
 import 'package:medifly/utilities/hospitalcard.dart';
 import 'package:medifly/utilities/constants.dart';
-import 'package:medifly/utilities/drawer.dart';
 import 'file:///E:/Projects/Medifly/lib/recenttoken_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -117,7 +113,7 @@ class _HomeScreenState extends State<HomeScreen> {
         elevation: 5,
         onTap: _onItemTapped,
       ),
-      backgroundColor: Colors.white,
+      backgroundColor: kPrimaryColorBlue,
       body: widget.pages[widget._selectedIndex],
     );
   }
@@ -130,6 +126,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Container(
+        color: Colors.white,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
