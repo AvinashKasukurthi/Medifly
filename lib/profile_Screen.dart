@@ -38,30 +38,125 @@ class _ProfileScreenState extends State<ProfileScreen> {
         padding: const EdgeInsets.all(15.0),
         child: Column(
           children: [
-            StreamBuilder<QuerySnapshot>(
-              stream:
-                  FirebaseFirestore.instance.collection('profiles').snapshots(),
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  Widget profile;
-                  final profileData = snapshot.data.docs;
-                  for (var proileDataCard in profileData) {
-                    if (phoneNo == proileDataCard.data()['phonenumber']) {
-                      profile = ProfileDetails(
-                        email: proileDataCard.data()['email'] ,
-                        phonenumber: proileDataCard.data()['phonenumber'],
-                        usertext: proileDataCard.data()['username'],
-                      );
-                    }
-                  }
-                  return profile;
-                }
-                return Container();
-              },
+            Expanded(
+              child: Column(
+                children: [
+                  StreamBuilder<QuerySnapshot>(
+                    stream: FirebaseFirestore.instance
+                        .collection('profiles')
+                        .snapshots(),
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData) {
+                        Widget profile;
+                        final profileData = snapshot.data.docs;
+                        for (var proileDataCard in profileData) {
+                          if (phoneNo == proileDataCard.data()['phonenumber']) {
+                            profile = ProfileDetails(
+                              email: proileDataCard.data()['email'],
+                              phonenumber: proileDataCard.data()['phonenumber'],
+                              usertext: proileDataCard.data()['username'],
+                            );
+                          }
+                        }
+                        return profile;
+                      }
+                      return Container();
+                    },
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              child: Column(
+                children: [
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      BoxLayoutShadow(
+                        icon: Icons.feedback,
+                        title: 'Feedback',
+                      ),
+                      BoxLayoutShadow(title: "About Us", icon: Icons.info),
+                    ],
+                  ),
+                  Container(
+                    margin:
+                        EdgeInsets.symmetric(horizontal: 30.0, vertical: 30.0),
+                    width: double.infinity,
+                    child: RaisedButton(
+                      onPressed: () {},
+                      color: kPrimaryColorBlue,
+                      elevation: 6.0,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(15.0),
+                        child: Text(
+                          'Logout',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w300,
+                            fontSize: 18,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             )
           ],
         ),
       )),
+    );
+  }
+}
+
+class BoxLayoutShadow extends StatelessWidget {
+  final String title;
+  final Function onTap;
+  final IconData icon;
+
+  const BoxLayoutShadow({@required this.title, this.onTap, this.icon});
+
+  @override
+  Widget build(BuildContext context) {
+    return RaisedButton(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(
+          Radius.circular(10),
+        ),
+      ),
+      color: kPrimaryColorBlue,
+      elevation: 6.0,
+      onPressed: onTap ?? () {},
+      child: Padding(
+        padding: const EdgeInsets.symmetric(
+          vertical: 45,
+          horizontal: 5.0,
+        ),
+        child: Column(
+          children: [
+            Icon(
+              icon,
+              color: Colors.white,
+              size: 40,
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Text(
+              title,
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 18,
+                  fontWeight: FontWeight.w300),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
@@ -108,7 +203,7 @@ class ProfileDetails extends StatelessWidget {
                 ),
                 child: RaisedButton(
                   onPressed: () async {
-                    if ( nametext == null) {
+                    if (nametext == null) {
                       nametext = '';
                     }
                     SharedPreferences preferences =
@@ -116,7 +211,7 @@ class ProfileDetails extends StatelessWidget {
                     phoneNo = preferences.getString('phoneNo');
                     print(nametext);
                     print(phoneNo);
-                    
+
                     ref.collection("profiles").doc('$phoneNo').update(
                       {
                         'username': nametext,
