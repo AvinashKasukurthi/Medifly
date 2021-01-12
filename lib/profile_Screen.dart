@@ -5,6 +5,7 @@ import 'package:medifly/main.dart';
 
 import 'package:medifly/utilities/constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 FirebaseFirestore ref = FirebaseFirestore.instance;
 
@@ -19,6 +20,15 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
   String username;
   String email;
+
+  _sendingMails() async {
+    const url = 'mailto:zerow.inc@gmail.com';
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,30 +48,90 @@ class _ProfileScreenState extends State<ProfileScreen> {
         padding: const EdgeInsets.all(15.0),
         child: Column(
           children: [
-            StreamBuilder<QuerySnapshot>(
-              stream:
-                  FirebaseFirestore.instance.collection('profiles').snapshots(),
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  Widget profile;
-                  final profileData = snapshot.data.docs;
-                  for (var proileDataCard in profileData) {
-                    if (phoneNo == proileDataCard.data()['phonenumber']) {
-                      profile = ProfileDetails(
-                        email: proileDataCard.data()['email'] ,
-                        phonenumber: proileDataCard.data()['phonenumber'],
-                        usertext: proileDataCard.data()['username'],
-                      );
-                    }
-                  }
-                  return profile;
-                }
-                return Container();
-              },
+            Expanded(
+              child: Column(
+                children: [
+                  StreamBuilder<QuerySnapshot>(
+                    stream: FirebaseFirestore.instance
+                        .collection('profiles')
+                        .snapshots(),
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData) {
+                        Widget profile;
+                        final profileData = snapshot.data.docs;
+                        for (var proileDataCard in profileData) {
+                          if (phoneNo == proileDataCard.data()['phonenumber']) {
+                            profile = ProfileDetails(
+                              email: proileDataCard.data()['email'],
+                              phonenumber: proileDataCard.data()['phonenumber'],
+                              usertext: proileDataCard.data()['username'],
+                            );
+                          }
+                        }
+                        return profile;
+                      }
+                      return Container();
+                    },
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              child: Column(
+                children: [
+                  ProfileThemeButton(
+                    title: "Feedback",
+                    ontap: _sendingMails,
+                  ),
+                  ProfileThemeButton(
+                    title: "About Us",
+                  ),
+                ],
+              ),
             )
           ],
         ),
       )),
+    );
+  }
+}
+
+class ProfileThemeButton extends StatelessWidget {
+  final Function ontap;
+  final String title;
+  const ProfileThemeButton({
+    this.ontap,
+    @required this.title,
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
+      width: double.infinity,
+      child: RaisedButton(
+        onPressed: ontap ??
+            () {
+              print(title);
+            },
+        color: kPrimaryColorBlue,
+        elevation: 4.0,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Text(
+            title,
+            style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.w300,
+              fontSize: 18,
+            ),
+          ),
+        ),
+      ),
     );
   }
 }
@@ -108,7 +178,7 @@ class ProfileDetails extends StatelessWidget {
                 ),
                 child: RaisedButton(
                   onPressed: () async {
-                    if ( nametext == null) {
+                    if (nametext == null) {
                       nametext = '';
                     }
                     SharedPreferences preferences =
@@ -116,7 +186,7 @@ class ProfileDetails extends StatelessWidget {
                     phoneNo = preferences.getString('phoneNo');
                     print(nametext);
                     print(phoneNo);
-                    
+
                     ref.collection("profiles").doc('$phoneNo').update(
                       {
                         'username': nametext,

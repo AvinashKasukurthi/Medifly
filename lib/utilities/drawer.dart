@@ -1,16 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:medifly/profile_Screen.dart';
-import 'package:medifly/utilities/recenttoken_screen.dart';
+import 'file:///E:/Projects/Medifly/lib/recenttoken_screen.dart';
 import 'constants.dart';
 import 'package:medifly/profile_Screen.dart';
 
 class Drawerpop extends StatelessWidget {
-  final String drawername;
-  const Drawerpop({
-    Key key, this.drawername,
-  }) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -18,62 +13,50 @@ class Drawerpop extends StatelessWidget {
         child: Column(
           children: [
             Container(
+              padding: EdgeInsets.only(top: 15),
+              height: 175,
               color: kPrimaryColorBlue,
               child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Flexible(
-                    child: Padding(
-                      padding: const EdgeInsets.only(
-                        top: 60,
-                        left: 25,
-                        right: 25,
-                        bottom: 25,
-                      ),
+                  Expanded(
+                    flex: 3,
+                    child: Center(
                       child: Container(
-                        child: Image.asset('images/AdLogo.png'),
+                        padding: EdgeInsets.only(left: 15),
+                        child: Image.asset(
+                          'images/AdLogo.png',
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
                   ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Center(
-                        child: Padding(
-                          padding: const EdgeInsets.only(
-                            top: 38.5,
-                          ),
-                          child: Text(
-                            'Hello!',
-                            style: kMainText.copyWith(
-                                color: Colors.white70, fontSize: 18.0),
+                  Expanded(
+                    flex: 5,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(
+                          "Medifly",
+                          style: TextStyle(
+                              fontSize: 25,
+                              fontWeight: FontWeight.w300,
+                              color: Colors.white),
+                        ),
+                        Text(
+                          '"Being part of your Health"',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 15.0,
+                            fontWeight: FontWeight.w300,
+                            color: Colors.white54,
                           ),
                         ),
-                      ),
-                      SizedBox(
-                        height: 8.0,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(2.0),
-                        child: Center(
-                          child: Container(
-                            height: 20.0,
-                            width: 150.0,
-                            child: Text(
-                              '$drawername',
-                              textAlign: TextAlign.center,
-                              softWrap: false,
-                              overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 20.0,
-                              ),
-                            ),
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
+                      ],
+                    ),
+                  )
                 ],
               ),
             ),
