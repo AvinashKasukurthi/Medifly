@@ -5,6 +5,7 @@ import 'package:medifly/main.dart';
 
 import 'package:medifly/utilities/constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 FirebaseFirestore ref = FirebaseFirestore.instance;
 
@@ -19,6 +20,15 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
   String username;
   String email;
+
+  _sendingMails() async {
+    const url = 'mailto:zerow.inc@gmail.com';
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -69,40 +79,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
             Container(
               child: Column(
                 children: [
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      BoxLayoutShadow(
-                        icon: Icons.feedback,
-                        title: 'Feedback',
-                      ),
-                      BoxLayoutShadow(title: "About Us", icon: Icons.info),
-                    ],
+                  ProfileThemeButton(
+                    title: "Feedback",
+                    ontap: _sendingMails,
                   ),
-                  Container(
-                    margin:
-                        EdgeInsets.symmetric(horizontal: 30.0, vertical: 30.0),
-                    width: double.infinity,
-                    child: RaisedButton(
-                      onPressed: () {},
-                      color: kPrimaryColorBlue,
-                      elevation: 6.0,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(15.0),
-                        child: Text(
-                          'Logout',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.w300,
-                            fontSize: 18,
-                          ),
-                        ),
-                      ),
-                    ),
+                  ProfileThemeButton(
+                    title: "About Us",
                   ),
                 ],
               ),
@@ -114,47 +96,40 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 }
 
-class BoxLayoutShadow extends StatelessWidget {
+class ProfileThemeButton extends StatelessWidget {
+  final Function ontap;
   final String title;
-  final Function onTap;
-  final IconData icon;
-
-  const BoxLayoutShadow({@required this.title, this.onTap, this.icon});
+  const ProfileThemeButton({
+    this.ontap,
+    @required this.title,
+    Key key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return RaisedButton(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(
-          Radius.circular(10),
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
+      width: double.infinity,
+      child: RaisedButton(
+        onPressed: ontap ??
+            () {
+              print(title);
+            },
+        color: kPrimaryColorBlue,
+        elevation: 4.0,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8),
         ),
-      ),
-      color: kPrimaryColorBlue,
-      elevation: 6.0,
-      onPressed: onTap ?? () {},
-      child: Padding(
-        padding: const EdgeInsets.symmetric(
-          vertical: 45,
-          horizontal: 5.0,
-        ),
-        child: Column(
-          children: [
-            Icon(
-              icon,
+        child: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Text(
+            title,
+            style: TextStyle(
               color: Colors.white,
-              size: 40,
+              fontWeight: FontWeight.w300,
+              fontSize: 18,
             ),
-            SizedBox(
-              height: 10,
-            ),
-            Text(
-              title,
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 18,
-                  fontWeight: FontWeight.w300),
-            ),
-          ],
+          ),
         ),
       ),
     );
