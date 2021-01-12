@@ -10,7 +10,7 @@ var departmentIcons = {
   'Lungs': 'lungs.png',
   'Pregnancy': 'pregnancy.png',
   'Child': 'baby.png',
-  'Mentel': 'brain.png',
+  'Mentel': 'brainstorm.png',
   'Ear': 'ear.png',
   'Stomach': 'stomach.png',
 };

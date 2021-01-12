@@ -6,23 +6,29 @@ import 'package:medifly/utilities/department_icons.dart';
 import 'package:medifly/utilities/pageheader.dart';
 import 'package:provider/provider.dart';
 
-class CategoriesWidget extends StatelessWidget {
+class CategoriesWidget extends StatefulWidget {
   const CategoriesWidget({this.cardDepartments, Key key}) : super(key: key);
   final List cardDepartments;
+
+  @override
+  _CategoriesWidgetState createState() => _CategoriesWidgetState();
+}
+
+class _CategoriesWidgetState extends State<CategoriesWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: kPrimaryColorBlue,
       body: Container(
         child: ListView.builder(
-          itemCount: cardDepartments.length,
+          itemCount: widget.cardDepartments.length,
           itemBuilder: (context, index) {
             return Padding(
               padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
               child: GestureDetector(
                 onTap: () {
                   Provider.of<CategoryData>(context, listen: false)
-                      .selectCategory(cardDepartments[index]);
+                      .selectCategory(widget.cardDepartments[index]);
                   Navigator.pop(context);
                 },
                 child: Container(
@@ -34,9 +40,9 @@ class CategoriesWidget extends StatelessWidget {
                   child: Center(
                     child: ListTile(
                       leading: Image.asset(
-                          'images/${departmentIcons[cardDepartments[index]]}'),
+                          'images/${departmentIcons[widget.cardDepartments[index]]}'),
                       title: Text(
-                        cardDepartments[index],
+                        widget.cardDepartments[index],
                       ),
                     ),
                   ),
@@ -50,8 +56,20 @@ class CategoriesWidget extends StatelessWidget {
   }
 }
 
-class CategoryPage extends StatelessWidget {
+class CategoryPage extends StatefulWidget {
   static String id = 'CategoryPage';
+
+  @override
+  _CategoryPageState createState() => _CategoryPageState();
+}
+
+class _CategoryPageState extends State<CategoryPage> {
+  @override
+  void initState() {
+    super.initState();
+    // TODO: implement initState
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -60,43 +78,43 @@ class CategoryPage extends StatelessWidget {
         child: Column(
           children: [
             PageHeader(title: "Categories"),
-            // StreamBuilder<QuerySnapshot>(
-            // stream:
-            //     FirebaseFirestore.instance.collection('token_data').snapshots(),
-            // builder: (context, snapshot) {
-            //   if (snapshot.hasData) {
-            //     final tokenCardData = snapshot.data.docs;
-            //   List<CardRecent> tokenCards = [];
-
-            //     for (var card in tokenCardData) {
-            //       if (phoneNo == card.data()['mobileNumber']) {
-            //         final tokenCard = CardRecent(
-            //           departmenttext: card.data()['department'],
-            //           date: card.data()['date'],
-            //           hospitalname: card.data()['hospitalName'],
-            //           imagetext: departmentIcons[card.data()['department']],
-            //           timetext: card.data()['time'],
-            //         );
-            //         tokenCards.add(tokenCard);
-            //       }
-            //     }
-            //     return tokenCards.isNotEmpty
-            //         ? Expanded(
-            //             child: Container(
-            //               child: GridView.count(
-            //                 shrinkWrap: true,
-            //                 // reverse: true,
-            //                 scrollDirection: Axis.vertical,
-            //                 crossAxisCount: 1,
-            //                 childAspectRatio: 1.5,
-            //                 children: tokenCards,
-            //               ),
-            //             ),
-            //           )
-            //         : Container();
-            //   }
-            //   return Container();
-            CategoryCard(),
+            StreamBuilder(
+              stream: FirebaseFirestore.instance
+                  .collection('categories')
+                  .snapshots(),
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  final categoryCardData = snapshot.data.docs;
+                  List<CategoryCard> categoryCards = [];
+                  for (var card in categoryCardData) {
+                    print('${card.data()['category']}');
+                    final categoryCard = CategoryCard(
+                      cardTitle: '${card.data()['category']}',
+                    );
+                    categoryCards.add(categoryCard);
+                  }
+                  return categoryCards.isNotEmpty
+                      ? Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.only(
+                              top: 8.0,
+                              left: 8.0,
+                              right: 8.0,
+                            ),
+                            child: GridView.count(
+                              shrinkWrap: true,
+                              scrollDirection: Axis.vertical,
+                              crossAxisCount: 2,
+                              childAspectRatio: 0.75,
+                              children: categoryCards,
+                            ),
+                          ),
+                        )
+                      : Container();
+                }
+                return Container();
+              },
+            )
           ],
         ),
       ),
@@ -105,18 +123,53 @@ class CategoryPage extends StatelessWidget {
 }
 
 class CategoryCard extends StatelessWidget {
+  final String cardTitle;
+  CategoryCard({
+    this.cardTitle,
+  });
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.all(
-          Radius.circular(25),
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Container(
+        width: 200,
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+              begin: Alignment.topRight,
+              end: Alignment.bottomLeft,
+              colors: [kPrimaryColorBlue, Colors.blue, Colors.blue[500]],
+              stops: [0.3, 0.7, 0.8]),
+          borderRadius: BorderRadius.all(
+            Radius.circular(20),
+          ),
         ),
-      ),
-      child: Column(
-        children: [
-          Text('Heart'),
-        ],
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+              child: Container(
+                width: 130,
+                child: Image.asset(
+                  'images/${departmentIcons['$cardTitle']}',
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+            Text(
+              '$cardTitle',
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.w300,
+                color: Colors.white,
+              ),
+            ),
+            SizedBox(
+              height: 20,
+            )
+          ],
+        ),
       ),
     );
   }

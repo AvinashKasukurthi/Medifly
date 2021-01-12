@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'file:///E:/Projects/Medifly/lib/bookingscreen.dart';
 import 'package:medifly/utilities/categories_data.dart';
+import 'package:medifly/utilities/constants.dart';
 import 'package:medifly/utilities/hospitalcard.dart';
 import 'package:medifly/utilities/pageheader.dart';
 import 'package:medifly/utilities/time_info.dart';
@@ -17,8 +18,10 @@ class HospitalPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: kPrimaryColorBlue,
       body: SafeArea(
         child: Container(
+          color: Colors.white,
           child: Column(
             children: [
               PageHeader(title: this.category),
