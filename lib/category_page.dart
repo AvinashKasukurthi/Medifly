@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:medifly/utilities/categories_data.dart';
+import 'package:medifly/utilities/categoryhospital.dart';
 import 'package:medifly/utilities/constants.dart';
 import 'package:medifly/utilities/department_icons.dart';
 import 'package:medifly/utilities/pageheader.dart';
@@ -124,51 +125,66 @@ class _CategoryPageState extends State<CategoryPage> {
 
 class CategoryCard extends StatelessWidget {
   final String cardTitle;
+  final Function onTap;
   CategoryCard({
     this.cardTitle,
+    this.onTap,
   });
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: Container(
-        width: 200,
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-              begin: Alignment.topRight,
-              end: Alignment.bottomLeft,
-              colors: [kPrimaryColorBlue, Colors.blue, Colors.blue[500]],
-              stops: [0.3, 0.7, 0.8]),
-          borderRadius: BorderRadius.all(
-            Radius.circular(20),
+      child: GestureDetector(
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => CategoryHospital(
+                category: cardTitle,
+              ),
+            ),
+          );
+        },
+        child: Container(
+          width: 200,
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+                begin: Alignment.topRight,
+                end: Alignment.bottomLeft,
+                colors: [kPrimaryColorBlue, Colors.blue, Colors.blue[500]],
+                stops: [0.3, 0.7, 0.8]),
+            borderRadius: BorderRadius.all(
+              Radius.circular(20),
+            ),
           ),
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
-              child: Container(
-                width: 130,
-                child: Image.asset(
-                  'images/${departmentIcons['$cardTitle']}',
-                  fit: BoxFit.cover,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                child: Container(
+                  width: 130,
+                  child: Image.asset(
+                    'images/${departmentIcons['$cardTitle']}',
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
-            ),
-            Text(
-              '$cardTitle',
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.w300,
-                color: Colors.white,
+              Text(
+                '$cardTitle',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w300,
+                  color: Colors.white,
+                ),
               ),
-            ),
-            SizedBox(
-              height: 20,
-            )
-          ],
+              SizedBox(
+                height: 20,
+              )
+            ],
+          ),
         ),
       ),
     );
