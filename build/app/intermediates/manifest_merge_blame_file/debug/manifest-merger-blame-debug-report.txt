@@ -1,6 +1,6 @@
 1<?xml version="1.0" encoding="utf-8"?>
 2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-3    package="com.example.medifly"
+3    package="com.zerotech.medifly"
 4    android:versionCode="1"
 5    android:versionName="1.0.0" >
 6
@@ -54,7 +54,7 @@
 35-->E:\Projects\Medifly\android\app\src\main\AndroidManifest.xml:13:9-44
 36        <activity
 36-->E:\Projects\Medifly\android\app\src\main\AndroidManifest.xml:16:9-47:20
-37            android:name="com.example.medifly.MainActivity"
+37            android:name="com.zerotech.medifly.MainActivity"
 37-->E:\Projects\Medifly\android\app\src\main\AndroidManifest.xml:17:13-41
 38            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
 38-->E:\Projects\Medifly\android\app\src\main\AndroidManifest.xml:20:13-163
@@ -192,7 +192,7 @@
 116-->[:image_picker] E:\Projects\Medifly\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:11:9-19:20
 117            android:name="io.flutter.plugins.imagepicker.ImagePickerFileProvider"
 117-->[:image_picker] E:\Projects\Medifly\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:12:13-82
-118            android:authorities="com.example.medifly.flutter.image_provider"
+118            android:authorities="com.zerotech.medifly.flutter.image_provider"
 118-->[:image_picker] E:\Projects\Medifly\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:13:13-74
 119            android:exported="false"
 119-->[:image_picker] E:\Projects\Medifly\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:14:13-37
@@ -233,7 +233,7 @@
 138-->[com.google.firebase:firebase-common:19.3.1] C:\Users\avina\.gradle\caches\transforms-2\files-2.1\e6e1125c79e6923d821cf67775979921\jetified-firebase-common-19.3.1\AndroidManifest.xml:26:9-31:39
 139            android:name="com.google.firebase.provider.FirebaseInitProvider"
 139-->[com.google.firebase:firebase-common:19.3.1] C:\Users\avina\.gradle\caches\transforms-2\files-2.1\e6e1125c79e6923d821cf67775979921\jetified-firebase-common-19.3.1\AndroidManifest.xml:27:13-77
-140            android:authorities="com.example.medifly.firebaseinitprovider"
+140            android:authorities="com.zerotech.medifly.firebaseinitprovider"
 140-->[com.google.firebase:firebase-common:19.3.1] C:\Users\avina\.gradle\caches\transforms-2\files-2.1\e6e1125c79e6923d821cf67775979921\jetified-firebase-common-19.3.1\AndroidManifest.xml:28:13-72
 141            android:directBootAware="true"
 141-->[com.google.firebase:firebase-common:19.3.1] C:\Users\avina\.gradle\caches\transforms-2\files-2.1\e6e1125c79e6923d821cf67775979921\jetified-firebase-common-19.3.1\AndroidManifest.xml:29:13-43

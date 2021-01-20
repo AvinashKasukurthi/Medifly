@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "applicationId": "com.example.medifly",
+  "applicationId": "com.zerotech.medifly",
   "variantType": "BASE_APK",
   "elements": [
     {
@@ -19,7 +19,7 @@
       },
       "path": "AndroidManifest.xml",
       "properties": {
-        "packageId": "com.example.medifly",
+        "packageId": "com.zerotech.medifly",
         "split": "",
         "minSdkVersion": "16"
       }

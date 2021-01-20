@@ -313,7 +313,7 @@
         <entry key="provider">
           <value>
             <list>
-              <option value="C:/flutter/.pub-cache/hosted/pub.dartlang.org/provider-4.3.2+3/lib" />
+              <option value="C:/flutter/.pub-cache/hosted/pub.dartlang.org/provider-4.3.3/lib" />
             </list>
           </value>
         </entry>
@@ -543,7 +543,7 @@
       <root url="file://C:/flutter/.pub-cache/hosted/pub.dartlang.org/platform-2.2.1/lib" />
       <root url="file://C:/flutter/.pub-cache/hosted/pub.dartlang.org/plugin_platform_interface-1.0.3/lib" />
       <root url="file://C:/flutter/.pub-cache/hosted/pub.dartlang.org/process-3.0.13/lib" />
-      <root url="file://C:/flutter/.pub-cache/hosted/pub.dartlang.org/provider-4.3.2+3/lib" />
+      <root url="file://C:/flutter/.pub-cache/hosted/pub.dartlang.org/provider-4.3.3/lib" />
       <root url="file://C:/flutter/.pub-cache/hosted/pub.dartlang.org/quiver-2.1.5/lib" />
       <root url="file://C:/flutter/.pub-cache/hosted/pub.dartlang.org/rounded_floating_app_bar-0.1.0/lib" />
       <root url="file://C:/flutter/.pub-cache/hosted/pub.dartlang.org/shared_preferences-0.5.12+4/lib" />
