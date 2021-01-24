@@ -46,7 +46,11 @@ class _HospitalCardState extends State<HospitalCard> {
               children: [
                 Expanded(
                   child: Container(
-                    child: Image.network('${widget.image}', fit: BoxFit.cover),
+                    child:
+                        Image.network('${widget.image}', fit: BoxFit.cover) ??
+                            Container(
+                              child: CircularProgressIndicator(),
+                            ),
                   ),
                 ),
                 Container(

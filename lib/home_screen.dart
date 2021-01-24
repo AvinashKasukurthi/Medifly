@@ -39,6 +39,8 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   bool isSearching = false;
   FirebaseFirestore ref = FirebaseFirestore.instance;
+
+  
   void updateProfile() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     phoneNo = preferences.getString('phoneNo');

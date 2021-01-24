@@ -113,7 +113,9 @@ class _CategoryPageState extends State<CategoryPage> {
                         )
                       : Container();
                 }
-                return Container();
+                return CircularProgressIndicator(
+                    // valueColor: kPrimaryColorBlue,
+                    );
               },
             )
           ],
@@ -148,13 +150,17 @@ class CategoryCard extends StatelessWidget {
         child: Container(
           width: 200,
           decoration: BoxDecoration(
-            gradient: LinearGradient(
-                begin: Alignment.topRight,
-                end: Alignment.bottomLeft,
-                colors: [kPrimaryColorBlue, Colors.blue, Colors.blue[500]],
-                stops: [0.3, 0.7, 0.8]),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.shade50,
+                blurRadius: 15,
+                offset: Offset(0, 5),
+                spreadRadius: 1.5,
+              )
+            ],
+            color: kCardsColor,
             borderRadius: BorderRadius.all(
-              Radius.circular(20),
+              Radius.circular(10),
             ),
           ),
           child: Column(
@@ -177,7 +183,6 @@ class CategoryCard extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w300,
-                  color: Colors.white,
                 ),
               ),
               SizedBox(
