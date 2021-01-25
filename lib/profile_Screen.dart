@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:medifly/about_medifly.dart';
 import 'package:medifly/main.dart';
 
 import 'package:medifly/utilities/constants.dart';
@@ -85,6 +86,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                   ProfileThemeButton(
                     title: "About Us",
+                    ontap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => AboutMedifly(),
+                        ),
+                      );
+                    },
                   ),
                 ],
               ),
@@ -178,23 +187,7 @@ class ProfileDetails extends StatelessWidget {
                 ),
                 child: RaisedButton(
                   onPressed: () async {
-                    if (nametext == null) {
-                      nametext = '';
-                    }
-                    SharedPreferences preferences =
-                        await SharedPreferences.getInstance();
-                    phoneNo = preferences.getString('phoneNo');
-                    print(nametext);
-                    print(phoneNo);
-
-                    ref.collection("profiles").doc('$phoneNo').update(
-                      {
-                        'username': nametext,
-                      },
-                    );
-                    Navigator.pop(context);
-
-                    messageTextController.clear();
+                    await saveAndUpdateProfileUserNameInFirebase(context);
                   },
                   child: Text(
                     'Save',
@@ -243,25 +236,7 @@ class ProfileDetails extends StatelessWidget {
                 ),
                 child: RaisedButton(
                   onPressed: () async {
-                    if (emailText == null) {
-                      emailText = '';
-                    }
-                    SharedPreferences preferences =
-                        await SharedPreferences.getInstance();
-                    phoneNo = preferences.getString('phoneNo');
-                    print(nametext);
-                    print(phoneNo);
-                    if (emailText.isEmpty || emailText == null) {
-                      emailText = '';
-                    }
-                    ref.collection("profiles").doc('$phoneNo').update(
-                      {
-                        'email': emailText,
-                      },
-                    );
-                    Navigator.pop(context);
-
-                    messageTextController.clear();
+                    await saveAndUpdateUserMailInFirebase(context);
                   },
                   child: Text(
                     'Save',
@@ -317,6 +292,61 @@ class ProfileDetails extends StatelessWidget {
           title: Text(phoneNo),
         ),
       ],
+    );
+  }
+
+  Future saveAndUpdateUserMailInFirebase(BuildContext context) async {
+    await changeUserMailUsingPhoneNumber(context);
+
+    messageTextController.clear();
+  }
+
+  Future changeUserMailUsingPhoneNumber(BuildContext context) async {
+    updateUserEmail();
+    await getUserPhoneNumberFromSharedPrefernces();
+
+    Navigator.pop(context);
+  }
+
+  void updateUserEmail() {
+    if (emailText.isEmpty || emailText == null) {
+      emailText = '';
+    }
+    ref.collection("profiles").doc('$phoneNo').update(
+      {
+        'email': emailText,
+      },
+    );
+  }
+
+  Future saveAndUpdateProfileUserNameInFirebase(BuildContext context) async {
+    await updateUserName(context);
+    messageTextController.clear();
+  }
+
+  Future updateUserName(BuildContext context) async {
+    if (nametext == null) {
+      nametext = '';
+    }
+    await changeUserNameUsingPhoneNumber(context);
+  }
+
+  Future changeUserNameUsingPhoneNumber(BuildContext context) async {
+    await getUserPhoneNumberFromSharedPrefernces();
+    updateUserNameFieldInFirebase();
+    Navigator.pop(context);
+  }
+
+  Future getUserPhoneNumberFromSharedPrefernces() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    phoneNo = preferences.getString('phoneNo');
+  }
+
+  void updateUserNameFieldInFirebase() {
+    ref.collection("profiles").doc('$phoneNo').update(
+      {
+        'username': nametext,
+      },
     );
   }
 }

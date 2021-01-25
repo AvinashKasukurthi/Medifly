@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:medifly/models/hospital_card_details.dart';
 import 'file:///E:/Projects/Medifly/lib/bookingscreen.dart';
 import 'package:medifly/utilities/categories_data.dart';
 import 'package:medifly/utilities/constants.dart';
@@ -38,13 +39,28 @@ class HospitalPage extends StatelessWidget {
                       if (totalHospitalCardsOnHome > 49) {
                         break;
                       }
+                      HospitalCardDetails cardDetailsFromHospitalPage =
+                          HospitalCardDetails(
+                        name: card.data()['name'],
+                        imageUrl: card.data()['image'],
+                        cost: card.data()['cost'],
+                        location: card.data()['location'],
+                        departments: card.data()['categories'],
+                        time: card.data()['Timedata'],
+                      );
 
-                      final cardName = card.data()['name'];
-                      final cardImage = card.data()['image'];
-                      final cardHospitalCost = card.data()['cost'];
-                      final cardlocation = card.data()['location'];
-                      final cardDepartments = card.data()['categories'];
-                      final cardTime = card.data()['Timedata'];
+                      final cardName =
+                          cardDetailsFromHospitalPage.getHospitalCardItemName();
+                      final cardImage = cardDetailsFromHospitalPage
+                          .getHospitalCardItemImageUrl();
+                      final cardHospitalCost =
+                          cardDetailsFromHospitalPage.getHospitalCardItemCost();
+                      final cardlocation = cardDetailsFromHospitalPage
+                          .getHospitalCardItemLocation();
+                      final cardDepartments = cardDetailsFromHospitalPage
+                          .getHospitalCardItemDepartments();
+                      final cardTime =
+                          cardDetailsFromHospitalPage.getHospitalCardItemTime();
                       final largeCard = HospitalCard(
                         title: cardName,
                         location: cardlocation,
@@ -54,23 +70,8 @@ class HospitalPage extends StatelessWidget {
                         textHeight: 20,
                         time: cardTime,
                         onPressed: () {
-                          Provider.of<CategoryData>(context, listen: false)
-                              .userOut();
-                          Provider.of<SlotData>(context, listen: false)
-                              .userOut();
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => BookingScreen(
-                                amount: cardHospitalCost,
-                                image: cardImage,
-                                hospitalName: cardName,
-                                location: cardlocation,
-                                departments: cardDepartments,
-                                timeList: cardTime,
-                              ),
-                            ),
-                          );
+                          statusUpdationAndRedirectTOBookingScreen(
+                              context, cardDetailsFromHospitalPage);
                         },
                       );
                       hospitalCards.add(largeCard);
@@ -96,6 +97,34 @@ class HospitalPage extends StatelessWidget {
               ),
             ],
           ),
+        ),
+      ),
+    );
+  }
+
+  void statusUpdationAndRedirectTOBookingScreen(
+      BuildContext context, HospitalCardDetails cardDetailsFromHospitalPage) {
+    statusUpdationInProviderSlotDataAndCategoryData(context);
+    redirectToBookingScreen(context, cardDetailsFromHospitalPage);
+  }
+
+  void statusUpdationInProviderSlotDataAndCategoryData(BuildContext context) {
+    Provider.of<CategoryData>(context, listen: false).userOut();
+    Provider.of<SlotData>(context, listen: false).userOut();
+  }
+
+  void redirectToBookingScreen(
+      BuildContext context, HospitalCardDetails cardDetails) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => BookingScreen(
+          amount: cardDetails.getHospitalCardItemCost(),
+          image: cardDetails.getHospitalCardItemImageUrl(),
+          hospitalName: cardDetails.getHospitalCardItemName(),
+          location: cardDetails.getHospitalCardItemLocation(),
+          departments: cardDetails.getHospitalCardItemDepartments(),
+          timeList: cardDetails.getHospitalCardItemTime(),
         ),
       ),
     );

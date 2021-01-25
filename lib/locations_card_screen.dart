@@ -5,6 +5,7 @@ import 'package:medifly/utilities/categories_data.dart';
 import 'package:medifly/utilities/constants.dart';
 import 'package:medifly/utilities/hospitalcard.dart';
 import 'package:medifly/utilities/pageheader.dart';
+import 'package:medifly/utilities/time_info.dart';
 import 'package:provider/provider.dart';
 
 class LocationCardScreen extends StatefulWidget {
@@ -32,20 +33,7 @@ class _LocationCardScreenState extends State<LocationCardScreen> {
             location: locationData.data()['location'],
             textHeight: 22,
             onPressed: () {
-              Provider.of<CategoryData>(context, listen: false).userOut();
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => BookingScreen(
-                    amount: locationData.data()['cost'],
-                    image: locationData.data()['image'],
-                    hospitalName: locationData.data()['name'],
-                    location: locationData.data()['location'],
-                    departments: locationData.data()['categories'],
-                    timeList: locationData.data()['Timedata'],
-                  ),
-                ),
-              );
+              resetAndRedirectBookingScreen(locationData);
             },
           );
           setState(() {
@@ -55,6 +43,32 @@ class _LocationCardScreenState extends State<LocationCardScreen> {
         }
       }
     }
+  }
+
+  void resetAndRedirectBookingScreen(QueryDocumentSnapshot locationData) {
+    resetBookingScreenOnBack();
+    redirectToBookingScreen(locationData);
+  }
+
+  void resetBookingScreenOnBack() {
+    Provider.of<CategoryData>(context, listen: false).userOut();
+    Provider.of<SlotData>(context, listen: false).userOut();
+  }
+
+  void redirectToBookingScreen(QueryDocumentSnapshot locationData) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => BookingScreen(
+          amount: locationData.data()['cost'],
+          image: locationData.data()['image'],
+          hospitalName: locationData.data()['name'],
+          location: locationData.data()['location'],
+          departments: locationData.data()['categories'],
+          timeList: locationData.data()['Timedata'],
+        ),
+      ),
+    );
   }
 
   @override

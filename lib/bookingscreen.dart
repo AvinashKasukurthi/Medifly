@@ -297,41 +297,7 @@ class _BookingScreenState extends State<BookingScreen> {
               Container(
                 child: RaisedButton(
                   onPressed: () async {
-                    String timename =
-                        Provider.of<SlotData>(context, listen: false).slot;
-                    String departmentName =
-                        Provider.of<CategoryData>(context, listen: false)
-                            .category;
-
-                    SharedPreferences preferences =
-                        await SharedPreferences.getInstance();
-                    phoneNo = preferences.getString('phoneNo');
-                    firebaseref.collection('token_data').add({
-                      'hospitalName': widget.hospitalName,
-                      'address': widget.location,
-                      'date':
-                          '${dateTime.day}/${dateTime.month}/${dateTime.year}',
-                      'department': departmentName,
-                      'time': timename,
-                      'mobileNumber': phoneNo,
-                    });
-                    // Navigator.of(context).push(
-                    //   MaterialPageRoute(
-                    //       builder: (context) => HomePage(
-                    //           hospitalName: widget.hospitalName,
-                    //           location: widget.location)),
-                    // );
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => TokenScreen(
-                          hospitalname: widget.hospitalName,
-                          address: widget.location,
-                          day: '${dateTime.day}',
-                          month: '${dateTime.month}',
-                          year: ' ${dateTime.year}',
-                        ),
-                      ),
-                    );
+                    await createAndRedirectTokenToTokenScreen(context);
                   },
                   color: kRedButton,
                   child: Padding(
@@ -366,5 +332,52 @@ class _BookingScreenState extends State<BookingScreen> {
         ),
       ),
     );
+  }
+
+  Future createAndRedirectTokenToTokenScreen(BuildContext context) async {
+    await creationOfBookingInfo(context);
+
+    redirectToTokenScreen(context);
+  }
+
+  Future creationOfBookingInfo(BuildContext context) async {
+    String timename = getTimeFromProviderSlotData(context);
+    String departmentName = getDepartmentNameFromProviderCategoryData(context);
+
+    await addUserBookingInfo(departmentName, timename);
+  }
+
+  Future redirectToTokenScreen(BuildContext context) {
+    return Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => TokenScreen(
+          hospitalname: widget.hospitalName,
+          address: widget.location,
+          day: '${dateTime.day}',
+          month: '${dateTime.month}',
+          year: ' ${dateTime.year}',
+        ),
+      ),
+    );
+  }
+
+  String getTimeFromProviderSlotData(BuildContext context) =>
+      Provider.of<SlotData>(context, listen: false).slot;
+
+  String getDepartmentNameFromProviderCategoryData(BuildContext context) {
+    return Provider.of<CategoryData>(context, listen: false).category;
+  }
+
+  Future addUserBookingInfo(String departmentName, String timename) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    phoneNo = preferences.getString('phoneNo');
+    firebaseref.collection('token_data').add({
+      'hospitalName': widget.hospitalName,
+      'address': widget.location,
+      'date': '${dateTime.day}/${dateTime.month}/${dateTime.year}',
+      'department': departmentName,
+      'time': timename,
+      'mobileNumber': phoneNo,
+    });
   }
 }
