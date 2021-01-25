@@ -40,7 +40,6 @@ class _HomeScreenState extends State<HomeScreen> {
   bool isSearching = false;
   FirebaseFirestore ref = FirebaseFirestore.instance;
 
-  
   void updateProfile() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     phoneNo = preferences.getString('phoneNo');
@@ -84,37 +83,37 @@ class _HomeScreenState extends State<HomeScreen> {
           BottomNavigationBarItem(
             icon: Icon(Icons.home_outlined),
             activeIcon: Icon(Icons.home),
-            backgroundColor: kPrimaryColorBlue,
+            backgroundColor: Theme.of(context).primaryColor,
             label: 'Home',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.search_outlined),
             activeIcon: Icon(Icons.search),
+            backgroundColor: Theme.of(context).primaryColor,
             label: 'Search',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.widgets_outlined),
             activeIcon: Icon(Icons.widgets_rounded),
+            backgroundColor: Theme.of(context).primaryColor,
             label: 'Categories',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.history_outlined),
             activeIcon: Icon(Icons.history_rounded),
+            backgroundColor: Theme.of(context).primaryColor,
             label: 'History',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.account_circle_outlined),
             activeIcon: Icon(Icons.account_circle_rounded),
+            backgroundColor: Theme.of(context).primaryColor,
             label: 'Account',
           ),
         ],
-        selectedItemColor: Colors.white,
-        unselectedItemColor: Colors.white70,
         currentIndex: widget._selectedIndex,
-        elevation: 5,
         onTap: _onItemTapped,
       ),
-      backgroundColor: kPrimaryColorBlue,
       body: widget.pages[widget._selectedIndex],
     );
   }

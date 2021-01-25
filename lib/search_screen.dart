@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:medifly/locations_card_screen.dart';
 import 'package:medifly/utilities/constants.dart';
@@ -72,73 +71,79 @@ class _SearchScreenState extends State<SearchScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Container(
-        color: Colors.white,
-        child: Column(
-          children: [
-            Container(
-              child: Padding(
-                padding: const EdgeInsets.all(15.0),
-                child: TextField(
-                  controller: searchController,
-                  autofocus: true,
-                  decoration: InputDecoration(
-                    prefixIcon: Icon(
-                      Icons.search,
-                      color: kPrimaryColorBlue,
+    return Scaffold(
+      body: SafeArea(
+        child: Container(
+          color: Colors.white,
+          child: Column(
+            children: [
+              Container(
+                child: Padding(
+                  padding: const EdgeInsets.all(15.0),
+                  child: TextField(
+                    controller: searchController,
+                    decoration: InputDecoration(
+                      filled: true,
+                      fillColor: Colors.blue[50],
+                      prefixIcon: Icon(
+                        Icons.search,
+                        color: kPrimaryColorBlue,
+                      ),
+                      hintText: 'search',
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Theme.of(context).primaryColor,
+                        ),
+                      ),
                     ),
-                    hintText: 'search',
-                    border: OutlineInputBorder(
-                        borderSide: BorderSide(color: kPrimaryColorBlue)),
                   ),
                 ),
               ),
-            ),
-            Container(
-              child: Expanded(
-                child: ListView.builder(
-                  itemCount: isSearching == true
-                      ? locationfilterd.length
-                      : locationlist.length,
-                  itemBuilder: (context, index) {
-                    return GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => LocationCardScreen(
-                                location: isSearching == true
-                                    ? locationfilterd[index]
-                                    : locationlist[index],
-                              ),
-                            ));
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 10, vertical: 2),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: kCardsColor,
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: ListTile(
-                            leading: Icon(
-                              Icons.location_on,
-                              color: kPrimaryColorBlue,
+              Container(
+                child: Expanded(
+                  child: ListView.builder(
+                    itemCount: isSearching == true
+                        ? locationfilterd.length
+                        : locationlist.length,
+                    itemBuilder: (context, index) {
+                      return GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => LocationCardScreen(
+                                  location: isSearching == true
+                                      ? locationfilterd[index]
+                                      : locationlist[index],
+                                ),
+                              ));
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 10, vertical: 2),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: kCardsColor,
+                              borderRadius: BorderRadius.circular(10),
                             ),
-                            title: Text(isSearching == true
-                                ? locationfilterd[index]
-                                : locationlist[index]),
+                            child: ListTile(
+                              leading: Icon(
+                                Icons.location_on,
+                                color: kPrimaryColorBlue,
+                              ),
+                              title: Text(isSearching == true
+                                  ? locationfilterd[index]
+                                  : locationlist[index]),
+                            ),
                           ),
                         ),
-                      ),
-                    );
-                  },
+                      );
+                    },
+                  ),
                 ),
-              ),
-            )
-          ],
+              )
+            ],
+          ),
         ),
       ),
     );
