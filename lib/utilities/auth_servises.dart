@@ -79,7 +79,9 @@ class _PhoneAuthState extends State<PhoneAuth>
         builder: (context) {
           return Container(
             child: Center(
-              child: CircularProgressIndicator(),
+              child: CircularProgressIndicator(
+                valueColor: AlwaysStoppedAnimation<Color>(kPrimaryColorBlue),
+              ),
             ),
           );
         });

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 Color kPrimaryColorBlue = Color(0xFF2B67F5);
 
-Color kCardsColor = Color(0xFFECF4F3);
+Color kCardsColor = Colors.blueGrey.shade50;
 
 Color kRedButton = Color(0xFFFF1744);
 

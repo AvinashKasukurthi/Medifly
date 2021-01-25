@@ -1,13 +1,16 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:medifly/category_page.dart';
 import 'package:medifly/home_screen.dart';
 import 'package:flutter/services.dart';
+import 'package:medifly/hospitalspage.dart';
 import 'package:medifly/utilities/auth_servises.dart';
 import 'package:medifly/utilities/categories_data.dart';
 import 'package:medifly/profile_Screen.dart';
 import 'package:medifly/search_screen.dart';
-import 'package:medifly/utilities/recenttoken_screen.dart';
+import 'package:medifly/utilities/constants.dart';
+import 'file:///E:/Projects/Medifly/lib/recenttoken_screen.dart';
 
 import 'package:medifly/utilities/time_info.dart';
 import 'package:provider/provider.dart';
@@ -55,6 +58,17 @@ class _MyAppState extends State<MyApp> {
         },
         child: MaterialApp(
           title: 'Medifly',
+          theme: ThemeData(
+            primaryColor: kPrimaryColorBlue,
+            scaffoldBackgroundColor: kPrimaryColorBlue,
+            accentColor: kPrimaryColorBlue,
+            bottomAppBarColor: kPrimaryColorBlue,
+            bottomNavigationBarTheme: BottomNavigationBarThemeData(
+              backgroundColor: kPrimaryColorBlue,
+              unselectedItemColor: Colors.white70,
+              selectedItemColor: Colors.white,
+            ),
+          ),
           //To off the debug tag in all screens
           debugShowCheckedModeBanner: false,
           home: (phoneNo == null) ? PhoneAuth() : HomeScreen(),
@@ -63,7 +77,9 @@ class _MyAppState extends State<MyApp> {
             HomeScreen.id: (context) => HomeScreen(),
             ProfileScreen.id: (context) => ProfileScreen(),
             SearchScreen.id: (context) => SearchScreen(),
-            RecentCards.id: (context)=> RecentCards(),
+            RecentCards.id: (context) => RecentCards(),
+            HospitalPage.id: (context) => HospitalPage(),
+            CategoryPage.id: (context) => CategoryPage(),
           },
         ),
       ),

@@ -15,6 +15,43 @@
       },
       "oauth_client": [
         {
+          "client_id": "366780871616-en9bm8juthdu8dv04rb0udhpvvbaisdp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.medifly",
+            "certificate_hash": "baa7ba79370390e4e85d4ae8e5d801f39c6d46ba"
+          }
+        },
+        {
+          "client_id": "366780871616-oenqepol2ca0faf30bsojvaabcv7bff0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCPDAUw4GYEou0yhtdQtVnUdVkrBBZfQPk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "366780871616-oenqepol2ca0faf30bsojvaabcv7bff0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:366780871616:android:1ca1d03c6978e156ec4e25",
+        "android_client_info": {
+          "package_name": "com.zerotech.medifly"
+        }
+      },
+      "oauth_client": [
+        {
           "client_id": "366780871616-oenqepol2ca0faf30bsojvaabcv7bff0.apps.googleusercontent.com",
           "client_type": 3
         }

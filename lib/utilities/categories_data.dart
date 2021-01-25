@@ -7,6 +7,7 @@ class CategoryData extends ChangeNotifier {
   void selectCategory(value) {
     clicked = true;
     category = value;
+
     notifyListeners();
   }
 

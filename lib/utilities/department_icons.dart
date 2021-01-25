@@ -10,7 +10,24 @@ var departmentIcons = {
   'Lungs': 'lungs.png',
   'Pregnancy': 'pregnancy.png',
   'Child': 'baby.png',
-  'Mentel': 'brain.png',
+  'Mentel': 'brainstorm.png',
   'Ear': 'ear.png',
   'Stomach': 'stomach.png',
+};
+
+var departments = {
+  'Heart': 'gs://medifly-ce14e.appspot.com/icons/heart (1).png',
+  'Eye': 'gs://medifly-ce14e.appspot.com/icons/eye.png',
+  'Diabetes': 'gs://medifly-ce14e.appspot.com/icons/sugar-blood-level.png',
+  'Nerves': 'gs://medifly-ce14e.appspot.com/icons/neuron.png',
+  'Bone': 'gs://medifly-ce14e.appspot.com/icons/bone.png',
+  'Kidney': 'gs://medifly-ce14e.appspot.com/icons/kidney (1).png',
+  'Skin': 'gs://medifly-ce14e.appspot.com/icons/epidermis.png',
+  'Women': 'gs://medifly-ce14e.appspot.com/icons/women.png',
+  'Lungs': 'gs://medifly-ce14e.appspot.com/icons/lungs (1).png',
+  'Pregnancy': 'gs://medifly-ce14e.appspot.com/icons/pregnancy (1).png',
+  'Child': 'gs://medifly-ce14e.appspot.com/icons/baby-boy.png',
+  'Mentel': 'gs://medifly-ce14e.appspot.com/icons/brainstorm.png',
+  'Ear': 'gs://medifly-ce14e.appspot.com/icons/listen.png',
+  'Stomach': 'gs://medifly-ce14e.appspot.com/icons/stomach(1).png',
 };
